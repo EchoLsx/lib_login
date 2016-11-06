@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection">
+    <meta name="keywords" content="登录，绑定，杭电图书馆">
+    <meta name="description" content="HDU座位管理系统绑定">
+    <meta name="author" content="EchoLsx">
+    <title>学号绑定</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <h1>E  - lib</h1>
+        </nav>
+        <!-- <form action="" method="POST"> -->
+        <div id="form-login">
+            <input type="text" placeholder="username">
+            <input type="password" placeholder="password">
+            <input id="submit" type="submit" value="登录">
+        </div>
+        <!-- </form> -->
+        <div id="form-error"></div>
+        <footer>
+            <small id="forget">忘记密码？</small>
+        </footer>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/shake.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#msg').hide();
+    $('#form-login').slideDown('slow', function() {
+        $('#user').focus()
+    });
+    $('#submit').click(function() {
+        $('#submit').val('正在提交');
+        $.ajax({
+            type: 'POST',
+            url: 'login.php',
+            data: 'user=' + $('#user').val() + '&password=' + $('#password').val(),
+            dataType: 'json',
+            success: function(data) {
+                if (data.status == -1) {
+                    $('#form-error').html(data.msg).slideDown('slow'); //登录失败或者密码有误
+                    flash('#form-login',8,10,100);
+                    $('input[type=password]').val('');
+                } else if (data.status == 0) {
+                    window.location.replace(data.url); //注册成功并跳转
+                }
+                $('#submit').val('登录');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { //post失败
+                $('#form-error').html("提交失败");
+                flash('#form-login',8,10,100);
+                $('input[type=password]').val('');
+                $('#submit').val('登录');
+            }
+        });
+        return false;
+    });
+});
+
+	
+</script>
+
+</html>
