@@ -56,7 +56,7 @@ nav h1
 }
 
 #form-login {
-/*  position: absolute;*/
+  /*position: static;*/
  /* left: 50%;*/
   /*margin-left: -185px;*/
   /*width: 370px;*/
@@ -119,7 +119,7 @@ footer small,#form-error
 }
 #form-error
 {
-	position:absolute;
+	position:fixed;
 	width: 100%;
 	display: block;
 	bottom: 60px;

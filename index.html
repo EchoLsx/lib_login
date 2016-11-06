@@ -40,12 +40,17 @@ $(document).ready(function() {
  
     if($(document).height() < oHeight){
         $("#form-login").css("position","static");
-        $("footer").css("display","none");
     }else{
         $("#form-login").css("position","absolute");
-        $("footer").css("display","block");
     }    
   });
+
+
+$('input').bind('focus',function(){
+    $('footer').css('position','static');
+    }).bind('blur',function(){
+    $('footer').css({'position':'fixed'});
+});
 
 
 
