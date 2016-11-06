@@ -8,6 +8,7 @@
     <meta name="description" content="HDU座位管理系统绑定">
     <meta name="author" content="EchoLsx">
     <title>学号绑定</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
     <link rel="stylesheet" href="css/login.css">
 </head>
 
@@ -33,9 +34,19 @@
 <script type="text/javascript" src="js/shake.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#msg').hide();
+    var oHeight = $(document).height(); //浏览器当前的高度
+   
+   $(window).resize(function(){
+ 
+    if($(document).height() < oHeight){
+        $("#form-login").css("position","static");
+    }else{
+         
+        $("#form-login").css("position","absolute");
+    }    
+});
     $('#form-login').slideDown('slow', function() {
-        $('#user').focus()
+        $('#user').focus();
     });
     $('#submit').click(function() {
         $('#submit').val('正在提交');
@@ -64,6 +75,7 @@ $(document).ready(function() {
         return false;
     });
 });
+
 
 	
 </script>
